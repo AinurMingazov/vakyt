@@ -1,0 +1,56 @@
+[tool.poetry]
+name = "vakyt"
+version = "0.1.0"
+description = "Personal time manager"
+authors = ["ainur <anr.mgzv@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+aiogram = "^3.13.1"
+sqlalchemy = "^2.0.36"
+asyncpg = "^0.30.0"
+psycopg2-binary = "^2.9.10"
+fastapi = "^0.115.3"
+alembic = "^1.13.3"
+uvicorn = "^0.32.0"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.3"
+ruff = "^0.7.2"
+isort = "^5.13.2"
+mypy = "^1.13.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.isort]
+# Set the maximum line length to 120.
+line_length = 120
+
+[tool.ruff]
+
+# Set the maximum line length to 120.
+line-length = 120
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".git",
+    ".ruff_cache",
+    ".venv",
+    "venv",
+    "migrations",
+    "pyproject.toml",
+    "poetry.lock",
+    "README.md",
+    "readme_ruff_integration.md",
+    ".dockerignore",
+]
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "single"

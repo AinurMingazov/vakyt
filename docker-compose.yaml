@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+
+  db:
+    build:
+      context: .
+      dockerfile: db/Dockerfile
+      args:
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_DB=${POSTGRES_DB}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    restart: on-failure
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_SUPERUSER=${POSTGRES_SUPERUSER}
+      - POSTGRES_SUPERUSER_PASSWORD=${POSTGRES_SUPERUSER_PASSWORD}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_SUPERUSER} -p 5443" ]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "5443:5443"
+    env_file: .env
+
+  vakyt_bot:
+    build:
+      context: .
+    command: vakyt_bot/entrypoint.sh
+    env_file: .env
+
+  api:
+    build:
+      context: .
+    command: api/entrypoint.sh
+    env_file: .env
+    depends_on:
+      - db
+    ports:
+      - "88:88"
+    volumes:
+      - ./:/api/
+
+volumes:
+  postgres_data:
