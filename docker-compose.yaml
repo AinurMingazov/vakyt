@@ -43,7 +43,8 @@ services:
     command: api/entrypoint.sh
     env_file: .env
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - "88:88"
     volumes:

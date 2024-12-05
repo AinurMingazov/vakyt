@@ -1,3 +1,21 @@
+# Установка и запуск докере
+
+Переименовать **.env-sample** в **.env**
+
+Выполнить:
+```
+sudo docker-compose up --build 
+```
+
+если нужно пересобрать
+```
+sudo docker-compose down -v 
+
+sudo docker-compose build --no-cache 
+
+sudo docker-compose up
+
+```
 
 ---
 # ruff
