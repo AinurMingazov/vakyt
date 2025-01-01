@@ -2,7 +2,7 @@ from pathlib import Path
 
 from sqlalchemy import text
 
-from session import sync_session
+from .session import sync_session
 
 
 def fill_db():

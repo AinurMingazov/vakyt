@@ -31,7 +31,7 @@ class Category(Base):
     __tablename__ = 'categories'
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    telegram_id = Column(BigInteger, nullable=False, index=True)
+    telegram_id = Column(BigInteger, nullable=True)
 
 
 class TimeSlot(Base):

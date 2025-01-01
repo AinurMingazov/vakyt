@@ -2,7 +2,7 @@
 
 Revision ID: 0001
 Revises:
-Create Date: 2024-11-05 21:40:09.744869
+Create Date: 2024-12-30 06:36:30.010828
 
 """
 
@@ -25,10 +25,9 @@ def upgrade() -> None:
         'categories',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('name', sa.String(), nullable=True),
-        sa.Column('telegram_id', sa.BigInteger(), nullable=False),
+        sa.Column('telegram_id', sa.BigInteger(), nullable=True),
         sa.PrimaryKeyConstraint('id'),
     )
-    op.create_index(op.f('ix_categories_telegram_id'), 'categories', ['telegram_id'], unique=False)
     op.create_table(
         'closers',
         sa.Column('id', sa.Integer(), nullable=False),
@@ -84,6 +83,5 @@ def downgrade() -> None:
     op.drop_table('time_slots')
     op.drop_table('reminders')
     op.drop_table('closers')
-    op.drop_index(op.f('ix_categories_telegram_id'), table_name='categories')
     op.drop_table('categories')
     # ### end Alembic commands ###
