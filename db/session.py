@@ -1,5 +1,5 @@
 import os
-from typing import Generator
+from typing import AsyncGenerator
 
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.engine import url
@@ -32,13 +32,13 @@ engine = create_async_engine(
     ASYNC_DATABASE_URL, future=True, echo=True, execution_options={'isolation_level': 'AUTOCOMMIT'}
 )
 
-async_session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
+async_session = sessionmaker(bind=engine, expire_on_commit=False, class_=AsyncSession) # type: ignore[call-overload]
 
 sync_engine = create_engine(SYNC_DATABASE_URL)
 sync_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=sync_engine))
 
 
-async def get_db_session() -> Generator:
+async def get_db_session() -> AsyncGenerator:
     """Dependency for getting async session"""
     try:
         session: AsyncSession = async_session()
