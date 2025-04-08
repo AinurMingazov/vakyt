@@ -28,17 +28,6 @@ sudo docker-compose up
 
 
 ---
-# poetry
-
-Зависимости устанавливаются\добавляются с помощью утилиты `poetry` . [Установка](https://python-poetry.org/docs/)
-
-В папке проекта из терминала и ввести `poetry build` `poetry install`. 
-
-Poetry создаст виртуальное окружение в папке `.venv` проекта.
-
-Активация виртуального окружения  `poetry shell` 
-
----
 # Alembic
 
 - Создание миграции: ```alembic revision --autogenerate -m "comment" --rev-id XXXX(порядковый id)``` 
@@ -47,3 +36,9 @@ Poetry создаст виртуальное окружение в папке `.
 
 ---
 
+# uv
+Установка `curl -LsSf https://astral.sh/uv/install.sh | sh`
+
+В папке проекта из терминала и ввести `uv init` `uv sync`
+
+Активация виртуального окружения  `source .venv/bin/activate`
