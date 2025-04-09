@@ -24,7 +24,7 @@ class User(Base):
     reminder = relationship('Reminder')
     closer_id = Column(Integer, ForeignKey('closers.id'))
     closer = relationship('Closer')
-    is_active = Column(Boolean)
+    is_active = Column(Boolean, default=True)
 
 
 class Category(Base):
@@ -42,3 +42,4 @@ class TimeSlot(Base):
     category = relationship('Category')
     start_time = Column(DateTime)
     end_time = Column(DateTime)
+    is_auto = Column(Boolean, default=True)
