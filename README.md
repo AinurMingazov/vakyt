@@ -1,20 +1,15 @@
 # Установка и запуск докере
 
-Переименовать **.env-sample** в **.env**
-
-Выполнить:
-```
-sudo docker-compose up --build 
-```
+1. Переименовать **.env-sample** в **.env**
+2. Установить uv
+3. Выполнить: `./export_requirements.sh`
+4. Выполнить: `sudo docker-compose up --build`
 
 если нужно пересобрать
 ```
 sudo docker-compose down -v 
-
 sudo docker-compose build --no-cache 
-
 sudo docker-compose up
-
 ```
 
 ---
